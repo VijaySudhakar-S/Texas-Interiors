@@ -55,12 +55,13 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
         {/* Logo */}
         <a href="#home" className="flex items-center gap-3 group select-none">
-          <div className="relative w-10 h-10 overflow-hidden rounded-lg bg-white/5 border border-white/10 group-hover:border-primary transition-colors duration-300">
+          <div className="relative w-11 h-11 transition-transform duration-300 group-hover:scale-105">
             <Image
               src="/images/TexasLogo.avif"
               alt="Texas Interior & Promoters Logo"
               fill
-              className="object-contain p-1"
+              className="object-contain"
+              priority
             />
           </div>
           <div className="flex flex-col">

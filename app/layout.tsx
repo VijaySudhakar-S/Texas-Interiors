@@ -72,6 +72,11 @@ export const metadata: Metadata = {
     description: "Premium luxury interior designers and builders in Tamil Nadu. Specializing in high-end residential, modular kitchens, offices, and turnkey construction projects.",
     images: ["/images/hero-preview.jpg"],
   },
+  icons: {
+    icon: "/images/TexasLogo.avif",
+    shortcut: "/images/TexasLogo.avif",
+    apple: "/images/TexasLogo.avif",
+  },
 };
 
 export default function RootLayout({

@@ -1,111 +1,149 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence, Variants } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, PhoneCall } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isPastHero, setIsPastHero] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
-      if (currentScrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-
-      if (currentScrollY > lastScrollY && currentScrollY > 150) {
-        setIsVisible(false); // scrolling down
-      } else {
-        setIsVisible(true); // scrolling up
-      }
+      setIsScrolled(currentScrollY > 20);
+      setIsPastHero(currentScrollY > 650);
+      setIsVisible(!(currentScrollY > lastScrollY && currentScrollY > 200));
       setLastScrollY(currentScrollY);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  // Close menu on route change
+  useEffect(() => { setIsOpen(false); }, [pathname]);
+
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Projects", href: "#projects" },
-    { name: "Process", href: "#process" },
-    { name: "FAQ", href: "#faq" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home",     href: "/" },
+    { name: "About",    href: "/about" },
+    { name: "Services", href: "/services" },
+    { name: "Projects", href: "/projects" },
+    { name: "Contact",  href: "/contact" },
   ];
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  const headerBg = isHome
+    ? isPastHero
+      ? "bg-[#080808]/95 backdrop-blur-md shadow-sm py-3"
+      : isScrolled
+        ? "bg-[#1a1a1a]/95 backdrop-blur-md shadow-sm py-3"
+        : "bg-transparent py-6"
+    : isScrolled
+      ? "bg-[#080808]/95 backdrop-blur-md shadow-sm py-3"
+      : "bg-transparent py-6";
+
+  const onWhite = false;
 
   return (
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: isVisible ? 0 : -100 }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-[#080808]/80 py-4 shadow-lg backdrop-blur-md" : "bg-transparent py-6"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerBg}`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+        
         {/* Logo */}
-        <a href="#home" className="flex items-center gap-3 group select-none">
-          <div className="relative w-11 h-11 transition-transform duration-300 group-hover:scale-105">
+        <Link href="/" className="flex items-center gap-3 group select-none">
+          <div className="relative w-10 h-10 transition-transform duration-300 group-hover:scale-105">
             <Image
               src="/images/TexasLogo.avif"
-              alt="Texas Interior & Promoters Logo"
+              alt="Texas Interior & Promoters"
               fill
               className="object-contain"
               priority
             />
           </div>
-          <div className="flex flex-col">
-            <span className="font-serif text-xl font-bold tracking-widest text-white group-hover:text-primary transition-colors leading-none">
+          <div className="flex flex-col leading-none">
+            <span
+              className={`font-serif text-lg font-bold tracking-[0.3em] transition-colors group-hover:text-primary ${
+                onWhite ? "text-[#111]" : "text-white group-hover:text-primary-light"
+              }`}
+              style={{ fontFamily: "var(--font-cormorant)" }}>
               TEXAS
             </span>
-            <span className="text-[8px] tracking-[0.25em] text-text-muted uppercase group-hover:text-white transition-colors mt-0.5">
-              Interior & Promoters
+            <span
+              className={`text-[8px] tracking-[0.22em] uppercase mt-0.5 transition-colors font-medium ${
+                onWhite ? "text-black/60" : "text-white/60"
+              }`}
+              style={{ fontFamily: "var(--font-dm-sans)" }}>
+              Interior &amp; Promoters
             </span>
           </div>
-        </a>
+        </Link>
 
         {/* Desktop Links */}
         <nav className="hidden lg:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
+          {navLinks.map((link: typeof navLinks[0]) => (
+            <Link
               key={link.name}
               href={link.href}
-              className="text-xs uppercase tracking-widest text-text-muted hover:text-white transition-colors relative group py-2"
+              className={`relative text-[11px] uppercase tracking-[0.18em] py-2 transition-colors duration-300 group ${
+                onWhite
+                  ? isActive(link.href)
+                    ? "text-black font-bold"
+                    : "text-black/70 hover:text-black font-semibold"
+                  : isActive(link.href)
+                    ? "text-white font-semibold"
+                    : "text-white/70 hover:text-white font-medium"
+              }`}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {link.name}
-              <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-primary transition-all duration-300 group-hover:w-full" />
-            </a>
+              <span className={`absolute bottom-0 left-0 h-[1.5px] transition-all duration-300 ${
+                onWhite ? "bg-primary" : "bg-primary-light"
+              } ${
+                isActive(link.href) ? "w-full" : "w-0 group-hover:w-full"
+              }`} />
+            </Link>
           ))}
         </nav>
 
-        {/* Call to Action Button */}
+        {/* CTA */}
         <div className="hidden lg:flex items-center">
-          <a
-            href="#contact"
-            className="px-6 py-2.5 rounded-full bg-primary hover:bg-secondary text-white font-medium text-xs uppercase tracking-wider transition-all hover:scale-105 duration-300 flex items-center gap-2 border border-primary-light/20 shadow-md shadow-primary/20"
+          <Link
+            href="/contact"
+            className={`flex items-center gap-2 px-5 py-2.5 text-[10px] uppercase tracking-[0.18em] font-medium transition-all duration-300 ${
+              onWhite
+                ? "bg-[#111] hover:bg-primary text-white"
+                : "bg-primary hover:bg-primary-light text-white"
+            }`}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
-            <PhoneCall size={13} />
+            <PhoneCall size={12} />
             Book Consultation
-          </a>
+          </Link>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Hamburger */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="lg:hidden text-white hover:text-primary transition-colors p-2"
+          className={`lg:hidden transition-colors p-2 ${
+            onWhite ? "text-[#111] hover:text-primary" : "text-white hover:text-primary-light"
+          }`}
           aria-label="Toggle Menu"
         >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
+          {isOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
@@ -116,34 +154,49 @@ export default function Navbar() {
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
-            transition={{ type: "tween", duration: 0.3 }}
-            className="fixed inset-0 z-40 lg:hidden bg-bg-dark flex flex-col justify-between p-8 pt-28"
+            transition={{ type: "tween", duration: 0.28 }}
+            className="fixed inset-0 z-40 lg:hidden bg-[#080808] flex flex-col justify-between p-8 pt-28"
           >
-            <div className="absolute top-0 right-0 w-full h-full bg-luxury-grid pointer-events-none opacity-20" />
+            {/* Background pattern */}
+            <div
+              className="absolute inset-0 opacity-5 pointer-events-none"
+              style={{ backgroundImage: "url('/images/pattern-dark.png')", backgroundSize: "cover" }}
+            />
             
-            <div className="flex flex-col gap-6 relative z-10">
-              {navLinks.map((link) => (
-                <a
+            <div className="flex flex-col gap-8 relative z-10">
+              {navLinks.map((link, i) => (
+                <motion.div
                   key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="font-serif text-3xl font-semibold tracking-wide text-text-muted hover:text-white transition-colors"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.06 }}
                 >
-                  {link.name}
-                </a>
+                  <Link
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`block font-serif text-4xl tracking-tight transition-colors duration-200 ${
+                      isActive(link.href) ? "text-primary-light" : "text-white/60 hover:text-white"
+                    }`}
+                    style={{ fontFamily: "var(--font-cormorant)", fontWeight: 400 }}
+                  >
+                    {link.name}
+                  </Link>
+                </motion.div>
               ))}
             </div>
 
             <div className="flex flex-col gap-4 relative z-10">
-              <a
-                href="#contact"
+              <Link
+                href="/contact"
                 onClick={() => setIsOpen(false)}
-                className="w-full text-center py-4 rounded-full bg-primary text-white font-medium tracking-wider text-xs uppercase transition-all border border-primary-light/20"
+                className="w-full text-center py-4 bg-primary text-white text-[10px] uppercase tracking-[0.2em] font-medium transition-all hover:bg-primary-light"
+                style={{ fontFamily: "var(--font-dm-sans)" }}
               >
                 Book Free Consultation
-              </a>
-              <div className="text-center text-xs text-text-muted mt-2">
-                Pudukkottai • Trichy • Tamil Nadu
+              </Link>
+              <div className="text-center text-[10px] text-white/25 tracking-widest uppercase"
+                style={{ fontFamily: "var(--font-dm-sans)" }}>
+                Pudukkottai · Trichy · Tamil Nadu
               </div>
             </div>
           </motion.div>

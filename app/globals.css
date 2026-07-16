@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* =============================================
+   TEXAS INTERIORS — Design System
+   Cormorant Garamond + DM Sans
+   Violet · Dark · Cream
+============================================= */
+
 @theme {
   --color-primary: #5A189A;
   --color-primary-dark: #3c096c;
@@ -7,17 +13,23 @@
   --color-secondary: #7B2CBF;
   --color-accent: #D9D9D9;
   --color-bg-dark: #080808;
-  --color-bg-card: #121212;
+  --color-bg-card: #111111;
+  --color-bg-cream: #F5F0E8;
+  --color-bg-violet: #160a28;
   --color-text-white: #FFFFFF;
+  --color-text-dark: #1a1a1a;
   --color-text-muted: #AFAFAF;
+  --color-text-cream: #F5F0E8;
 
-  --font-sans: var(--font-outfit), var(--font-geist-sans), sans-serif;
-  --font-serif: var(--font-playfair), Georgia, serif;
+  /* NEW — Cormorant Garamond for display, DM Sans for body */
+  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
+  --font-serif: var(--font-cormorant), Georgia, serif;
 }
 
 :root {
   --background: #080808;
   --foreground: #FFFFFF;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html,
@@ -28,45 +40,51 @@ body {
   margin: 0;
   padding: 0;
   font-family: var(--font-sans);
-  scroll-behavior: auto; /* Handled by Lenis smooth scroll */
+  scroll-behavior: auto;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 4px;
+/* ─── GRAIN OVERLAY (premium feel) ─── */
+.grain {
+  position: fixed;
+  top: -50%; left: -50%;
+  right: -50%; bottom: -50%;
+  width: 200%; height: 200%;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-anim 8s steps(10) infinite;
 }
-::-webkit-scrollbar-track {
-  background: #0d0d0d;
-}
-::-webkit-scrollbar-thumb {
-  background: #3c096c;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #7b2cbf;
+@keyframes grain-anim {
+  0%,100% { transform: translate(0,0); }
+  10%      { transform: translate(-5%,-10%); }
+  30%      { transform: translate(7%,-25%); }
+  50%      { transform: translate(-15%,10%); }
+  70%      { transform: translate(0%,15%); }
+  90%      { transform: translate(-10%,10%); }
 }
 
-/* Typography Utilities */
+/* ─── CUSTOM SCROLLBAR ─── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #3c096c; }
+::-webkit-scrollbar-thumb:hover { background: #7b2cbf; }
+
+/* ─── TYPOGRAPHY UTILITIES ─── */
 .text-luxury-gradient {
-  background: linear-gradient(135deg, #ffffff 20%, #d946ef 60%, #7b2cbf 100%);
+  background: linear-gradient(135deg, #ffffff 20%, #c084fc 60%, #7b2cbf 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-.text-outline {
-  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.07);
-  color: transparent;
-}
-
-.text-outline-primary {
-  -webkit-text-stroke: 1px rgba(157, 78, 221, 0.3);
-  color: transparent;
+  background-clip: text;
 }
 
 .text-violet-glow {
-  text-shadow: 0 0 24px rgba(157, 78, 221, 0.45);
+  text-shadow: 0 0 32px rgba(157, 78, 221, 0.5);
 }
 
-/* Glass utilities */
+/* ─── GLASS UTILITIES ─── */
 .bg-glass {
   background: rgba(20, 10, 30, 0.4);
   backdrop-filter: blur(14px);
@@ -75,73 +93,118 @@ body {
 }
 
 .bg-glass-heavy {
-  background: rgba(12, 5, 20, 0.85);
+  background: rgba(12, 5, 20, 0.9);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(157, 78, 221, 0.15);
 }
 
-/* Custom Interactive Cursor */
+/* ─── SECTION COLORS ─── */
+/* Dark section: bg-[#080808] text-white */
+/* Cream section: bg-[#F5F0E8] text-[#1a1a1a] */
+/* Violet section: bg-[#160a28] text-white */
+
+.section-dark   { background: #080808; color: #ffffff; }
+.section-cream  { background: #F5F0E8; color: #1a1a1a; }
+.section-violet { background: #160a28; color: #ffffff; }
+
+/* Cream section overrides for muted text */
+.section-cream p,
+.section-cream span { color: #4a4040; }
+
+/* ─── CURSOR ─── */
 .custom-cursor {
-  width: 24px;
-  height: 24px;
+  width: 22px; height: 22px;
   border: 1.5px solid rgba(157, 78, 221, 0.8);
-  box-shadow: 0 0 10px rgba(157, 78, 221, 0.3);
+  box-shadow: 0 0 10px rgba(157, 78, 221, 0.25);
   border-radius: 50%;
   position: fixed;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  z-index: 9999;
+  z-index: 9998;
 }
 
-/* Infinite Horizontal Marquee */
-.marquee-container {
-  display: flex;
-  overflow: hidden;
-  user-select: none;
-}
-
+/* ─── MARQUEE ─── */
+.marquee-container { display: flex; overflow: hidden; user-select: none; }
 .marquee-content {
-  display: flex;
-  flex-shrink: 0;
-  min-width: 100%;
-  justify-content: space-around;
-  align-items: center;
+  display: flex; flex-shrink: 0; min-width: 100%;
+  justify-content: space-around; align-items: center;
   animation: scroll-marquee 40s linear infinite;
 }
-
 @keyframes scroll-marquee {
   from { transform: translateX(0); }
-  to { transform: translateX(-100%); }
+  to   { transform: translateX(-100%); }
 }
 
-/* Rotating stamp badge animation */
-.rotating-stamp {
-  animation: rotate-stamp 22s linear infinite;
-}
-
+/* ─── ROTATING STAMP ─── */
+.rotating-stamp { animation: rotate-stamp 22s linear infinite; }
 @keyframes rotate-stamp {
   from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  to   { transform: rotate(360deg); }
 }
 
-/* Lenis Integration */
-html.lenis {
-  height: auto;
+/* ─── LENIS ─── */
+html.lenis { height: auto; }
+.lenis-smooth { scroll-behavior: auto !important; }
+.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis-stopped { overflow: hidden; }
+.lenis-scrolling iframe { pointer-events: none; }
+
+/* ─── PAGE HERO STRIP ─── */
+.page-hero {
+  background: #080808;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-.lenis-smooth {
-  scroll-behavior: auto !important;
+/* ─── BUTTON STYLES ─── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #5A189A;
+  color: #fff;
+  font-family: var(--font-dm-sans);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 14px 32px;
+  transition: background 0.3s ease;
+}
+.btn-primary:hover { background: #7B2CBF; }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.7);
+  font-family: var(--font-dm-sans);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 14px 32px;
+  transition: all 0.3s ease;
+}
+.btn-outline:hover {
+  border-color: #9d4edd;
+  color: #fff;
 }
 
-.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
+/* Cream section buttons */
+.btn-primary-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #1a1a1a;
+  color: #fff;
+  font-family: var(--font-dm-sans);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 14px 32px;
+  transition: background 0.3s ease;
 }
-
-.lenis-stopped {
-  overflow: hidden;
-}
-
-.lenis-scrolling iframe {
-  pointer-events: none;
-}
+.btn-primary-dark:hover { background: #5A189A; }

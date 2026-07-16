@@ -1,170 +1,200 @@
 "use client";
 
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { useRef, useState, useEffect } from "react";
-import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { ArrowUpRight, Play } from "lucide-react";
+
+const BADGE_TEXT = "Luxury · Crafted · Texas · Interiors · ";
+
+const heroImages = [
+  "/images/Hero.jpg",
+  "/images/hero-2.jpg",
+  "/images/hero-3.jpg",
+  "/images/hero-4.jpg",
+  "/images/hero-5.jpg",
+];
 
 export default function Hero() {
-  const [mounted, setMounted] = useState(false);
-  const imageRef = useRef<HTMLDivElement>(null);
+  const [currentIdx, setCurrentIdx] = useState(0);
 
-  useEffect(() => { setMounted(true); }, []);
-
-  // Subtle parallax on image on mouse move
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const smoothX = useSpring(mouseX, { stiffness: 60, damping: 20 });
-  const smoothY = useSpring(mouseY, { stiffness: 60, damping: 20 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    const { clientX, clientY, currentTarget } = e;
-    const { width, height, left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(((clientX - left) / width - 0.5) * 18);
-    mouseY.set(((clientY - top) / height - 0.5) * 12);
-  };
-
-  const stats = [
-    { value: "15+", label: "Yrs" },
-    { value: "450+", label: "Projects" },
-    { value: "Trichy", label: "& Pudukottai" },
-  ];
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIdx((prev) => (prev + 1) % heroImages.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <section
       id="home"
-      className="relative min-h-screen overflow-hidden bg-[#080808]"
-      onMouseMove={handleMouseMove}
+      className="relative w-full overflow-hidden"
+      style={{
+        paddingTop: "4.5rem", /* navbar height */
+        background: "linear-gradient(135deg, #1a1a1a 0%, #000000 100%)",
+      }}
     >
-      {/* Full-bleed image — no rounded frame, bleeds to right */}
-      <motion.div
-        ref={imageRef}
-        style={{ x: smoothX, y: smoothY }}
-        className="absolute right-0 top-0 w-[62vw] h-full pointer-events-none"
-      >
-        <div className="absolute inset-0">
-          <Image
-            src="/images/hero-bg.png"
-            alt="Luxury interior space by Texas Interior & Promoters"
-            fill
-            priority
-            className="object-cover"
-          />
-          {/* Gradient mask — heavy on left so text is readable */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/70 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]/30" />
-        </div>
-      </motion.div>
-
-      {/* Main content */}
-      <div className="relative z-10 min-h-screen flex flex-col justify-between pt-28 pb-12 px-8 md:px-16 xl:px-24">
-
-        {/* Top label */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex items-center gap-4"
-        >
-          <span className="h-px w-10 bg-white/15" />
-          <span className="text-[9px] font-mono uppercase tracking-[0.5em] text-primary-light/70">Pudukkottai · Trichy · Tamil Nadu</span>
-        </motion.div>
-
-        {/* Giant display headline — mixed weight */}
-        <div className="flex-1 flex flex-col justify-center max-w-4xl mt-4">
-          <div className="overflow-hidden">
-            <motion.div
-              initial={{ y: "110%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-            >
-              <span
-                className="block font-serif leading-none text-white/90 tracking-tight select-none"
-                style={{ fontSize: "clamp(4.5rem, 12vw, 13rem)", fontWeight: 200, letterSpacing: "-0.02em" }}
-              >
-                Texas
-              </span>
-            </motion.div>
-          </div>
-          <div className="overflow-hidden -mt-2 md:-mt-4">
-            <motion.div
-              initial={{ y: "110%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
-            >
-              <span
-                className="block font-serif leading-none text-primary-light select-none"
-                style={{ fontSize: "clamp(4.5rem, 12vw, 13rem)", fontWeight: 900, letterSpacing: "-0.04em" }}
-              >
-                Interiors
-              </span>
-            </motion.div>
-          </div>
-
-          {/* Descriptor + CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.9 }}
-            className="flex flex-col sm:flex-row sm:items-end gap-8 mt-10 md:mt-14"
-          >
-            <p className="text-white/50 text-sm leading-relaxed max-w-md font-light tracking-wide">
-              Designing timeless interiors, luxury residences, and premium commercial spaces across Pudukkottai, Trichy, and Tamil Nadu—where every detail reflects elegance, craftsmanship, and your vision.
-            </p>
-            <div className="flex gap-3 items-center shrink-0">
-              <a
-                href="#contact"
-                className="group flex items-center gap-2 bg-primary hover:bg-primary-light text-white text-[11px] uppercase tracking-[0.2em] font-semibold px-7 py-4 transition-all duration-300"
-              >
-                Schedule Consultation
-                <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </a>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Bottom strip */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.2 }}
-          className="flex items-end justify-between border-t border-white/5 pt-6"
-        >
-          {/* Stats — vertical strip style */}
-          <div className="flex gap-10 md:gap-16">
-            {stats.map((s, i) => (
-              <div key={i} className="flex flex-col gap-1">
-                <span className="font-serif font-black text-white text-2xl md:text-3xl tracking-tight leading-none">{s.value}</span>
-                <span className="text-[9px] uppercase tracking-[0.3em] text-white/30 font-mono">{s.label}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Rotating badge — smaller, more refined */}
-          <motion.div
-            initial={{ scale: 0, rotate: -90 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ type: "spring", delay: 1.4, stiffness: 120 }}
-            className="w-20 h-20 md:w-24 md:h-24 rounded-full border border-white/10 flex items-center justify-center relative"
-          >
-            <svg className="absolute w-full h-full animate-[spin_18s_linear_infinite]" viewBox="0 0 100 100">
-              <path id="hp-circle" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" fill="none" />
-              <text className="fill-white/30" style={{ fontSize: "7px", letterSpacing: "0.14em" }}>
-                <textPath href="#hp-circle">LUXURY INTERIORS · STRUCTURAL BUILDERS · </textPath>
-              </text>
-            </svg>
-            <span className="font-serif text-white/60 text-xs tracking-widest">Texas</span>
-          </motion.div>
-        </motion.div>
-      </div>
-
-      {/* Thin vertical accent line */}
-      <motion.div
-        initial={{ scaleY: 0 }}
-        animate={{ scaleY: 1 }}
-        transition={{ duration: 1.4, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute left-4 md:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary/30 to-transparent origin-top pointer-events-none"
+      <div
+        className="absolute bottom-0 left-0 right-0 h-52 pointer-events-none"
+        style={{ background: "linear-gradient(to top, #000000ff, transparent)" }}
       />
+      {/* Subtle Violet Pattern Background Overlay */}
+      <div
+        className="absolute inset-0 z-0 opacity-20 pointer-events-none"
+        style={{
+          backgroundImage: "url('/images/pattern-violet.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
+
+      {/* ── ROUNDED IMAGE CARD (like Poliform) ─────────────── */}
+      <div className="px-3 md:px-5 pt-2 pb-4 relative z-10">
+        <div
+          className="relative overflow-hidden"
+          style={{
+            height: "calc(100vh - 6rem)",
+            minHeight: "520px",
+            borderRadius: "20px",
+            border: "1px solid rgba(255, 255, 255, 0.08)",
+          }}
+        >
+          {/* Background image slideshow with smooth Ken Burns zoom */}
+          <AnimatePresence initial={false}>
+            <motion.div
+              key={currentIdx}
+              initial={{ opacity: 0, scale: 1.0 }}
+              animate={{ opacity: 1, scale: 1.08 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                opacity: { duration: 1.0 },
+                scale: { duration: 3.5, ease: "easeOut" },
+              }}
+              className="absolute inset-0 z-0"
+            >
+              <Image
+                src={heroImages[currentIdx]}
+                alt="Luxury interior by Texas Interiors"
+                fill
+                priority
+                className="object-cover object-center"
+                style={{ filter: "brightness(0.5)" }}
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          {/* ── HEADLINE — bottom-left, bleeds wide ─────────── */}
+          <div className="absolute bottom-[240px] sm:bottom-[190px] md:bottom-[160px] left-0 right-0 px-5 md:px-10 z-10">
+            {/* Small italic line above */}
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.15 }}
+              className="text-white/50 leading-none mb-0"
+              style={{
+                fontFamily: "var(--font-cormorant)",
+                fontSize: "clamp(1rem, 2vw, 1.6rem)",
+                fontWeight: 300,
+                fontStyle: "italic",
+                letterSpacing: "0.05em",
+              }}
+            >
+              Crafting
+            </motion.p>
+
+            {/* Massive headline word */}
+            <div className="overflow-hidden pb-5 -mb-5">
+              <motion.h1
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
+                className="leading-none whitespace-normal md:whitespace-nowrap break-words pb-3"
+                style={{
+                  fontFamily: "var(--font-cormorant)",
+                  fontSize: "clamp(3rem, 12vw, 13rem)",
+                  fontWeight: 700,
+                  color: "rgba(255,255,255,0.97)",
+                  letterSpacing: "-0.03em",
+                  lineHeight: 1.0,
+                }}
+              >
+                Tim<em style={{ fontStyle: "italic", color: "#9d4edd" }}>e</em>less{" "}
+                <span style={{ color: "rgba(255,255,255,0.88)" }}>Spaces</span>
+              </motion.h1>
+            </div>
+          </div>
+
+          {/* ── BOTTOM ROW ─────────────────────────────────── */}
+          <div className="absolute bottom-5 left-0 right-0 px-5 md:px-10 flex items-end justify-between gap-4 z-10">
+
+            {/* LEFT — description + CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="w-full sm:max-w-[340px] md:max-w-[400px] rounded-2xl p-4 flex flex-col gap-3"
+              style={{
+                background: "rgba(6,2,8,0.52)",
+                backdropFilter: "blur(14px)",
+                WebkitBackdropFilter: "blur(14px)",
+                border: "1px solid rgba(255,255,255,0.09)",
+              }}
+            >
+              <p
+                className="text-white/60 text-sm md:text-md leading-relaxed"
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
+              >
+                Modular kitchens, luxury residences, and turnkey construction across Tamil Nadu.
+              </p>
+              <Link
+                href="/projects"
+                className="group inline-flex items-center gap-2 bg-white hover:bg-primary hover:text-white text-[#111] transition-all duration-300 rounded-full w-fit"
+                style={{
+                  fontFamily: "var(--font-dm-sans)",
+                  fontSize: "10px",
+                  fontWeight: 700,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  padding: "8px 16px",
+                }}
+              >
+                View More
+                <ArrowUpRight size={10} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </Link>
+            </motion.div>
+
+            {/* RIGHT — rotating circular badge (hidden on mobile for space) */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.9 }}
+              className="relative w-25 h-25 md:w-30 md:h-30 shrink-0 hidden sm:block"
+            >
+              <svg viewBox="0 0 100 100" className="w-full h-full animate-[spin_18s_linear_infinite]">
+                <defs>
+                  <path id="badgePath" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0" />
+                </defs>
+                <text
+                  style={{
+                    fontSize: "10px",
+                    letterSpacing: "0.15em",
+                    fontFamily: "var(--font-dm-sans)",
+                    fill: "rgba(255,255,255,0.5)",
+                    fontWeight: 500,
+                  }}
+                >
+                  <textPath href="#badgePath">{BADGE_TEXT}</textPath>
+                </text>
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-2 h-2 rounded-full bg-primary" />
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

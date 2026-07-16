@@ -1,18 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Outfit, Playfair_Display } from "next/font/google";
+import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600"],
   display: "swap",
 });
 
@@ -87,10 +88,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${playfair.variable} h-full antialiased scroll-smooth`}
+      className={`${cormorant.variable} ${dmSans.variable} h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full flex flex-col bg-bg-dark text-text-white">
         {children}
+        {/* Grain overlay for premium texture */}
+        <div className="grain" aria-hidden="true" />
       </body>
     </html>
   );

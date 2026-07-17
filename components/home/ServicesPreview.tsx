@@ -11,7 +11,7 @@ const services = [
     tag: "Kitchens",
     title: "Modular Kitchens",
     desc: "German & Italian systems. Hafele, Hettich, Blum hardware. Island to L-shape.",
-    image: "/images/project-kitchen.png",
+    image: "/images/project-kitchen.avif",
     href: "/services",
   },
   {
@@ -19,7 +19,7 @@ const services = [
     tag: "Residential",
     title: "Home Interiors",
     desc: "Luxury villa interiors. Custom wardrobes, false ceilings, teak paneling.",
-    image: "/images/hero-bg.png",
+    image: "/images/hero-bg.avif",
     href: "/services",
   },
   {
@@ -27,7 +27,7 @@ const services = [
     tag: "Commercial",
     title: "Office & Commercial",
     desc: "Boardrooms, reception lounges, co-working spaces, acoustic panels.",
-    image: "/images/project-office.png",
+    image: "/images/project-office.avif",
     href: "/services",
   },
 ];
@@ -41,7 +41,7 @@ export default function ServicesPreview() {
       />
 
       {/* Label + Heading */}
-      <div className="max-w-7xl mx-auto mb-16">
+      <div className="max-w-7xl mx-auto mt-10 mb-16">
         <div className="flex items-center gap-4 mb-6">
           <span className="h-px w-8 bg-[#1a1a1a]/20" />
           <span className="text-[9px] uppercase tracking-[0.45em] text-[#1a1a1a]/40"

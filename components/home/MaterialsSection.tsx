@@ -10,37 +10,37 @@ const materials = [
     name: "Wood",
     subtitle: "Teak & Walnut Veneers",
     desc: "PU-lacquered natural veneer slices for wall panels and TV backdrops.",
-    image: "/images/material-wood.png",
+    image: "/images/material-wood.avif",
   },
   {
     name: "Stone",
     subtitle: "Granite & Slate",
     desc: "Premium dark granite and slate surfaces for flooring and feature walls.",
-    image: "/images/material-stone.png",
+    image: "/images/material-stone.avif",
   },
   {
     name: "Marble",
     subtitle: "Calacatta & Carrara",
     desc: "Polished Italian marble slabs with luxury gold and grey veining.",
-    image: "/images/material-marble.png",
+    image: "/images/material-marble.avif",
   },
   {
     name: "Metal",
     subtitle: "Brushed & Anodized",
     desc: "Rose gold Gola profiles and brushed steel Blum/Hettich hardware.",
-    image: "/images/material-metal.png",
+    image: "/images/material-metal.avif",
   },
   {
     name: "Glass",
     subtitle: "Frosted & Tempered",
     desc: "Backlit frosted glass partitions and tempered architectural panels.",
-    image: "/images/material-glass.png",
+    image: "/images/material-glass.avif",
   },
   {
     name: "Fabrics",
     subtitle: "Velvet & Linen",
     desc: "Premium upholstery fabrics in velvet, linen, and textured weaves.",
-    image: "/images/material-fabrics.png",
+    image: "/images/material-fabrics.avif",
   },
 ];
 

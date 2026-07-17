@@ -22,7 +22,7 @@ const services: Service[] = [
     tag: "Kitchens",
     title: "German & Italian\nModular Kitchens",
     desc: "Custom modular kitchens designed for high ergonomics. Moisture-resistant carcasses, high-gloss acrylic shutters, and premium German motion hardware.",
-    image: "/images/project-kitchen.png",
+    image: "/images/project-kitchen.avif",
     details: ["Island, Parallel & L-Shaped Layouts", "Hafele & Hettich tandem boxes", "Anti-fingerprint matte surfaces"],
     bg: "dark",
   },
@@ -31,7 +31,7 @@ const services: Service[] = [
     tag: "Residential",
     title: "Bespoke Home\nInteriors",
     desc: "Immersive interior solutions for luxury villas and apartments. Signature false ceiling aesthetics, custom wood panelings, and tailored lighting.",
-    image: "/images/hero-bg.png",
+    image: "/images/hero-bg.avif",
     details: ["Tailored modular wardrobes", "Custom false ceilings", "Teak veneer wall paneling"],
     bg: "cream",
   },
@@ -40,7 +40,7 @@ const services: Service[] = [
     tag: "Commercial",
     title: "Office & Commercial\nDesign",
     desc: "Ergonomic executive suites, co-working desk grids, corporate reception lounges, and premium conference rooms.",
-    image: "/images/project-office.png",
+    image: "/images/project-office.avif",
     details: ["Acoustic wall wood panels", "Executive boardroom fittings", "Smart cable management"],
     bg: "dark",
   },
@@ -49,7 +49,7 @@ const services: Service[] = [
     tag: "Planning",
     title: "Vaastu-Compliant\n3D Blueprinting",
     desc: "Architectural drafting, vaastu-optimized layouts, structural designs, and photographic 3D walkthrough rendering.",
-    image: "/images/project-blueprint.png",
+    image: "/images/project-blueprint.avif",
     details: ["Vaastu-compliant floor layouts", "3D exterior animations", "Structural load blueprints"],
     bg: "cream",
   },
@@ -58,7 +58,7 @@ const services: Service[] = [
     tag: "Construction",
     title: "Turnkey Villa\nConstruction",
     desc: "Premium construction from ground excavation to key handover. Sourcing finest materials and managing professional labor.",
-    image: "/images/project-construction.png",
+    image: "/images/project-construction.avif",
     details: ["Premium structural concrete", "Strict site supervisor audits", "Integrated plumbing & wiring"],
     bg: "dark",
   },
@@ -67,7 +67,7 @@ const services: Service[] = [
     tag: "Promoters",
     title: "Joint-Venture\nProperty Promoters",
     desc: "Joint developments and promoter listings of DTCP/TNRERA approved residential layouts in Trichy and Pudukkottai.",
-    image: "/images/project-villa.png",
+    image: "/images/project-villa.avif",
     details: ["DTCP approved layouts", "Joint-venture development", "Clear title deed verification"],
     bg: "cream",
   },
@@ -205,7 +205,7 @@ export default function ServicesPageClient() {
       <section className="relative bg-[#080808] pt-32 pb-20 md:pt-44 md:pb-24 px-6 md:px-12 xl:px-24 overflow-hidden border-b border-white/5">
         <div
           className="absolute inset-0 opacity-[0.06] pointer-events-none"
-          style={{ backgroundImage: "url('/images/pattern-dark.png')", backgroundSize: "cover" }}
+          style={{ backgroundImage: "url('/images/pattern-dark.avif')", backgroundSize: "cover" }}
         />
         <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
@@ -258,7 +258,7 @@ export default function ServicesPageClient() {
       >
         <div
           className="absolute inset-0 opacity-[0.1] pointer-events-none"
-          style={{ backgroundImage: "url('/images/pattern-violet.png')", backgroundSize: "cover" }}
+          style={{ backgroundImage: "url('/images/pattern-violet.avif')", backgroundSize: "cover" }}
         />
         <div className="max-w-7xl mx-auto relative z-10 text-center">
           <h2

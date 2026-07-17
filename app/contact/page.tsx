@@ -24,7 +24,7 @@ export default function ContactPage() {
             <section className="relative bg-[#080808] pt-32 pb-12 md:pt-44 md:pb-16 px-6 md:px-12 xl:px-24 overflow-hidden border-b border-white/5">
               <div
                 className="absolute inset-0 opacity-[0.06] pointer-events-none"
-                style={{ backgroundImage: "url('/images/pattern-dark.png')", backgroundSize: "cover" }}
+                style={{ backgroundImage: "url('/images/pattern-dark.avif')", backgroundSize: "cover" }}
               />
               <div className="max-w-7xl mx-auto relative z-10">
                 <div className="flex items-center gap-4 mb-6">

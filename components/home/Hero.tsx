@@ -9,11 +9,11 @@ import { ArrowUpRight, Play } from "lucide-react";
 const BADGE_TEXT = "Luxury · Crafted · Texas · Interiors · ";
 
 const heroImages = [
-  "/images/Hero.jpg",
-  "/images/hero-2.jpg",
-  "/images/hero-3.jpg",
-  "/images/hero-4.jpg",
-  "/images/hero-5.jpg",
+  "/images/Hero.avif",
+  "/images/hero-2.avif",
+  "/images/hero-3.avif",
+  "/images/hero-4.avif",
+  "/images/hero-5.avif",
 ];
 
 export default function Hero() {
@@ -43,19 +43,18 @@ export default function Hero() {
       <div
         className="absolute inset-0 z-0 opacity-20 pointer-events-none"
         style={{
-          backgroundImage: "url('/images/pattern-violet.png')",
+          backgroundImage: "url('/images/pattern-violet.avif')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       />
 
       {/* ── ROUNDED IMAGE CARD (like Poliform) ─────────────── */}
-      <div className="px-3 md:px-5 pt-2 pb-4 relative z-10">
+      {/* ── ROUNDED IMAGE CARD (like Poliform) ─────────────── */}
+      <div className="px-3 md:px-5 pt-2 pb-4 relative z-10 flex flex-col gap-4">
         <div
-          className="relative overflow-hidden"
+          className="relative overflow-hidden w-full h-[50vh] sm:h-[calc(100vh-6rem)] min-h-[380px] sm:min-h-[520px]"
           style={{
-            height: "calc(100vh - 6rem)",
-            minHeight: "520px",
             borderRadius: "20px",
             border: "1px solid rgba(255, 255, 255, 0.08)",
           }}
@@ -85,13 +84,13 @@ export default function Hero() {
           </AnimatePresence>
 
           {/* ── HEADLINE — bottom-left, bleeds wide ─────────── */}
-          <div className="absolute bottom-[240px] sm:bottom-[190px] md:bottom-[160px] left-0 right-0 px-5 md:px-10 z-10">
+          <div className="absolute bottom-4 sm:bottom-[190px] md:bottom-[160px] left-0 right-0 px-5 md:px-10 z-10">
             {/* Small italic line above */}
             <motion.p
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.15 }}
-              className="text-white/50 leading-none mb-0"
+              className="text-white/50 leading-none mb-1"
               style={{
                 fontFamily: "var(--font-cormorant)",
                 fontSize: "clamp(1rem, 2vw, 1.6rem)",
@@ -104,19 +103,18 @@ export default function Hero() {
             </motion.p>
 
             {/* Massive headline word */}
-            <div className="overflow-hidden pb-5 -mb-5">
+            <div className="overflow-hidden pb-2">
               <motion.h1
                 initial={{ y: "100%" }}
                 animate={{ y: 0 }}
                 transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
-                className="leading-none whitespace-normal md:whitespace-nowrap break-words pb-3"
+                className="leading-none whitespace-normal break-words"
                 style={{
                   fontFamily: "var(--font-cormorant)",
-                  fontSize: "clamp(3rem, 12vw, 13rem)",
+                  fontSize: "clamp(2.5rem, 10vw, 13rem)",
                   fontWeight: 700,
                   color: "rgba(255,255,255,0.97)",
                   letterSpacing: "-0.03em",
-                  lineHeight: 1.0,
                 }}
               >
                 Tim<em style={{ fontStyle: "italic", color: "#9d4edd" }}>e</em>less{" "}
@@ -125,8 +123,8 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* ── BOTTOM ROW ─────────────────────────────────── */}
-          <div className="absolute bottom-5 left-0 right-0 px-5 md:px-10 flex items-end justify-between gap-4 z-10">
+          {/* ── BOTTOM ROW (DESKTOP ONLY) ────────────────────── */}
+          <div className="absolute bottom-5 left-0 right-0 px-5 md:px-10 hidden sm:flex items-end justify-between gap-4 z-10">
 
             {/* LEFT — description + CTA */}
             <motion.div
@@ -164,12 +162,12 @@ export default function Hero() {
               </Link>
             </motion.div>
 
-            {/* RIGHT — rotating circular badge (hidden on mobile for space) */}
+            {/* RIGHT — rotating circular badge */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, delay: 0.9 }}
-              className="relative w-25 h-25 md:w-30 md:h-30 shrink-0 hidden sm:block"
+              className="relative w-25 h-25 md:w-30 md:h-30 shrink-0"
             >
               <svg viewBox="0 0 100 100" className="w-full h-full animate-[spin_18s_linear_infinite]">
                 <defs>
@@ -194,7 +192,43 @@ export default function Hero() {
 
           </div>
         </div>
+
+        {/* ── MOBILE ONLY BOTTOM ROW (rendered relative below image card) ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="w-full rounded-2xl p-5 flex flex-col gap-4 sm:hidden z-10"
+          style={{
+            background: "rgba(18, 12, 28, 0.4)",
+            backdropFilter: "blur(14px)",
+            WebkitBackdropFilter: "blur(14px)",
+            border: "1px solid rgba(157, 78, 221, 0.08)",
+          }}
+        >
+          <p
+            className="text-white/70 text-sm leading-relaxed"
+            style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
+          >
+            Modular kitchens, luxury residences, and turnkey construction across Tamil Nadu.
+          </p>
+          <Link
+            href="/projects"
+            className="group inline-flex items-center justify-center gap-2 bg-white hover:bg-primary hover:text-white text-[#111] transition-all duration-300 rounded-full w-full py-3"
+            style={{
+              fontFamily: "var(--font-dm-sans)",
+              fontSize: "11px",
+              fontWeight: 700,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+            }}
+          >
+            View More
+            <ArrowUpRight size={11} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </Link>
+        </motion.div>
       </div>
+
     </section>
   );
 }

@@ -21,7 +21,7 @@ const services: ServicePanel[] = [
     title: "German & Italian Modular Kitchens",
     description:
       "Custom modular kitchens designed for high ergonomics. Moisture-resistant carcasses, high-gloss acrylic shutters, and premium German motion hardware.",
-    image: "/images/project-kitchen.png",
+    image: "/images/project-kitchen.avif",
     details: ["Island, Parallel & L-Shaped Layouts", "Hafele & Hettich tandem boxes", "Anti-fingerprint matte surfaces"],
   },
   {
@@ -30,7 +30,7 @@ const services: ServicePanel[] = [
     title: "Bespoke Residential Interiors",
     description:
       "Immersive interior solutions for luxury villas and penthouse layouts. Signature false ceiling aesthetics, custom wooden panelings, and tailored lighting.",
-    image: "/images/hero-bg.png",
+    image: "/images/hero-bg.avif",
     details: ["Tailored modular wardrobes", "Custom false ceilings", "Teak veneer wall paneling"],
   },
   {
@@ -39,7 +39,7 @@ const services: ServicePanel[] = [
     title: "High-Performance Office Designs",
     description:
       "Ergonomic executive suites, co-working desk grids, corporate reception lounges, and premium conference spaces.",
-    image: "/images/project-office.png",
+    image: "/images/project-office.avif",
     details: ["Acoustic wall wood panels", "Executive boardroom fittings", "Smart office cable trays"],
   },
   {
@@ -48,7 +48,7 @@ const services: ServicePanel[] = [
     title: "Vaastu-Compliant 3D Blueprinting",
     description:
       "State-of-the-art architectural drafting, vaastu-optimized layouts, structural designs, and photographic 3D walkthrough rendering.",
-    image: "/images/project-blueprint.png",
+    image: "/images/project-blueprint.avif",
     details: ["Vaastu-compliant floor layouts", "3D exterior animations", "Structural load blueprints"],
   },
   {
@@ -57,7 +57,7 @@ const services: ServicePanel[] = [
     title: "Turnkey Construction",
     description:
       "Premium villa construction from ground excavation to keys handover. Sourcing finest cement, sand, steel, and managing professional labor.",
-    image: "/images/project-construction.png",
+    image: "/images/project-construction.avif",
     details: ["Premium structural concrete", "Strict supervisor site audits", "Integrated plumbing & wiring"],
   },
   {
@@ -66,7 +66,7 @@ const services: ServicePanel[] = [
     title: "Joint-Venture Property Promoters",
     description:
       "Joint developments and promoter listings of DTCP/TNRERA approved residential layouts in Trichy and Pudukkottai.",
-    image: "/images/project-villa.png",
+    image: "/images/project-villa.avif",
     details: ["DTCP approved layouts", "Joint-venture development audits", "Clear title deeds verification"],
   },
 ];

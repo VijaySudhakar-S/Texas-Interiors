@@ -38,7 +38,7 @@ export default function About() {
           data-cursor-text="STORY"
         >
           <Image
-            src="/images/project-villa.png"
+            src="/images/project-villa.avif"
             alt="Texas Interiors luxury project"
             fill
             className="object-cover brightness-75 hover:brightness-90 transition-all duration-700"

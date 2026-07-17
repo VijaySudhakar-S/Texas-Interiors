@@ -14,7 +14,7 @@ export default function CTABanner() {
       <div
         className="absolute inset-0 opacity-[0.12] pointer-events-none"
         style={{
-          backgroundImage: "url('/images/pattern-violet.png')",
+          backgroundImage: "url('/images/pattern-violet.avif')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

@@ -208,3 +208,142 @@ html.lenis { height: auto; }
   transition: background 0.3s ease;
 }
 .btn-primary-dark:hover { background: #5A189A; }
+
+/* =====================================================
+   FULLSCREEN INTRO ANIMATION & PRELOADER
+   ===================================================== */
+.intro-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.intro-overlay.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.intro-loader {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+}
+
+.loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 280px;
+  text-align: center;
+}
+
+.loader-progress-track {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.loader-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #5A189A, #9D4EDD);
+  width: 0%;
+  transition: width 0.15s ease-out;
+}
+
+.loader-percentage {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.6);
+  opacity: 0.85;
+  margin-top: -0.2rem;
+}
+
+.intro-skip-btn {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  z-index: 100000;
+  background: rgba(20, 10, 30, 0.4);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(157, 78, 221, 0.15);
+  border-radius: 50px;
+  padding: 0.6rem 1.4rem;
+  cursor: pointer;
+  color: #FFFFFF;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.intro-skip-btn:hover {
+  border-color: #9D4EDD;
+  background-color: rgba(157, 78, 221, 0.12);
+  transform: translateY(-2px);
+}
+
+.intro-skip-btn .btn-text {
+  transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.intro-skip-btn:hover .btn-text {
+  color: #9D4EDD;
+}
+
+.intro-skip-btn .btn-arrow {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.intro-skip-btn:hover .btn-arrow {
+  transform: translateX(4px);
+  color: #9D4EDD;
+}
+
+@media (max-width: 768px) {
+  .loader-content {
+    width: 220px;
+  }
+  .intro-skip-btn {
+    bottom: 24px;
+    right: 24px;
+    padding: 0.5rem 1.1rem;
+    font-size: 0.7rem;
+  }
+}
+

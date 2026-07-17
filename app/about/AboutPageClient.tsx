@@ -39,7 +39,7 @@ export default function AboutPageClient() {
         <div
           className="absolute inset-0 opacity-[0.06] pointer-events-none"
           style={{
-            backgroundImage: "url('/images/pattern-dark.png')",
+            backgroundImage: "url('/images/pattern-dark.avif')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -134,7 +134,7 @@ export default function AboutPageClient() {
             className="relative aspect-[4/5] overflow-hidden"
           >
             <Image
-              src="/images/project-villa.png"
+              src="/images/project-villa.avif"
               alt="Texas Interiors luxury residential project"
               fill
               className="object-cover"

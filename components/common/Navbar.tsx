@@ -31,6 +31,21 @@ export default function Navbar() {
   // Close menu on route change
   useEffect(() => { setIsOpen(false); }, [pathname]);
 
+  // Scroll lock when mobile drawer is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    };
+  }, [isOpen]);
+
   const navLinks = [
     { name: "Home",     href: "/" },
     { name: "About",    href: "/about" },
@@ -55,97 +70,99 @@ export default function Navbar() {
   const onWhite = false;
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: isVisible ? 0 : -100 }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerBg}`}
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-        
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group select-none">
-          <div className="relative w-10 h-10 transition-transform duration-300 group-hover:scale-105">
-            <Image
-              src="/images/TexasLogo.avif"
-              alt="Texas Interior & Promoters"
-              fill
-              className="object-contain"
-              priority
-            />
-          </div>
-          <div className="flex flex-col leading-none">
-            <span
-              className={`font-serif text-lg font-bold tracking-[0.3em] transition-colors group-hover:text-primary ${
-                onWhite ? "text-[#111]" : "text-white group-hover:text-primary-light"
-              }`}
-              style={{ fontFamily: "var(--font-cormorant)" }}>
-              TEXAS
-            </span>
-            <span
-              className={`text-[8px] tracking-[0.22em] uppercase mt-0.5 transition-colors font-medium ${
-                onWhite ? "text-black/60" : "text-white/60"
-              }`}
-              style={{ fontFamily: "var(--font-dm-sans)" }}>
-              Interior &amp; Promoters
-            </span>
-          </div>
-        </Link>
+    <>
+      <motion.header
+        initial={{ y: -100 }}
+        animate={{ y: isOpen ? 0 : (isVisible ? 0 : -100) }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${headerBg}`}
+      >
+        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+          
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-3 group select-none">
+            <div className="relative w-10 h-10 transition-transform duration-300 group-hover:scale-105">
+              <Image
+                src="/images/TexasLogo.avif"
+                alt="Texas Interior & Promoters"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+            <div className="flex flex-col leading-none">
+              <span
+                className={`font-serif text-lg font-bold tracking-[0.3em] transition-colors group-hover:text-primary ${
+                  onWhite ? "text-[#111]" : "text-white group-hover:text-primary-light"
+                }`}
+                style={{ fontFamily: "var(--font-cormorant)" }}>
+                TEXAS
+              </span>
+              <span
+                className={`text-[8px] tracking-[0.22em] uppercase mt-0.5 transition-colors font-medium ${
+                  onWhite ? "text-black/60" : "text-white/60"
+                }`}
+                style={{ fontFamily: "var(--font-dm-sans)" }}>
+                Interior &amp; Promoters
+              </span>
+            </div>
+          </Link>
 
-        {/* Desktop Links */}
-        <nav className="hidden lg:flex items-center gap-8">
-          {navLinks.map((link: typeof navLinks[0]) => (
+          {/* Desktop Links */}
+          <nav className="hidden lg:flex items-center gap-8">
+            {navLinks.map((link: typeof navLinks[0]) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`relative text-[11px] uppercase tracking-[0.18em] py-2 transition-colors duration-300 group ${
+                  onWhite
+                    ? isActive(link.href)
+                      ? "text-black font-bold"
+                      : "text-black/70 hover:text-black font-semibold"
+                    : isActive(link.href)
+                      ? "text-white font-semibold"
+                      : "text-white/70 hover:text-white font-medium"
+                }`}
+                style={{ fontFamily: "var(--font-dm-sans)" }}
+              >
+                {link.name}
+                <span className={`absolute bottom-0 left-0 h-[1.5px] transition-all duration-300 ${
+                  onWhite ? "bg-primary" : "bg-primary-light"
+                } ${
+                  isActive(link.href) ? "w-full" : "w-0 group-hover:w-full"
+                }`} />
+              </Link>
+            ))}
+          </nav>
+
+          {/* CTA */}
+          <div className="hidden lg:flex items-center">
             <Link
-              key={link.name}
-              href={link.href}
-              className={`relative text-[11px] uppercase tracking-[0.18em] py-2 transition-colors duration-300 group ${
+              href="/contact"
+              className={`flex items-center gap-2 px-5 py-2.5 text-[10px] uppercase tracking-[0.18em] font-medium transition-all duration-300 ${
                 onWhite
-                  ? isActive(link.href)
-                    ? "text-black font-bold"
-                    : "text-black/70 hover:text-black font-semibold"
-                  : isActive(link.href)
-                    ? "text-white font-semibold"
-                    : "text-white/70 hover:text-white font-medium"
+                  ? "bg-[#111] hover:bg-primary text-white"
+                  : "bg-primary hover:bg-primary-light text-white"
               }`}
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
-              {link.name}
-              <span className={`absolute bottom-0 left-0 h-[1.5px] transition-all duration-300 ${
-                onWhite ? "bg-primary" : "bg-primary-light"
-              } ${
-                isActive(link.href) ? "w-full" : "w-0 group-hover:w-full"
-              }`} />
+              <PhoneCall size={12} />
+              Book Consultation
             </Link>
-          ))}
-        </nav>
+          </div>
 
-        {/* CTA */}
-        <div className="hidden lg:flex items-center">
-          <Link
-            href="/contact"
-            className={`flex items-center gap-2 px-5 py-2.5 text-[10px] uppercase tracking-[0.18em] font-medium transition-all duration-300 ${
-              onWhite
-                ? "bg-[#111] hover:bg-primary text-white"
-                : "bg-primary hover:bg-primary-light text-white"
+          {/* Mobile Hamburger */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className={`lg:hidden transition-colors p-2 ${
+              onWhite ? "text-[#111] hover:text-primary" : "text-white hover:text-primary-light"
             }`}
-            style={{ fontFamily: "var(--font-dm-sans)" }}
+            aria-label="Toggle Menu"
           >
-            <PhoneCall size={12} />
-            Book Consultation
-          </Link>
+            {isOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
-
-        {/* Mobile Hamburger */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className={`lg:hidden transition-colors p-2 ${
-            onWhite ? "text-[#111] hover:text-primary" : "text-white hover:text-primary-light"
-          }`}
-          aria-label="Toggle Menu"
-        >
-          {isOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
-      </div>
+      </motion.header>
 
       {/* Mobile Drawer */}
       <AnimatePresence>
@@ -155,12 +172,12 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "tween", duration: 0.28 }}
-            className="fixed inset-0 z-40 lg:hidden bg-[#080808] flex flex-col justify-between p-8 pt-28"
+            className="fixed inset-0 z-[50] lg:hidden bg-[#080808] flex flex-col justify-between p-8 pt-28"
           >
             {/* Background pattern */}
             <div
               className="absolute inset-0 opacity-5 pointer-events-none"
-              style={{ backgroundImage: "url('/images/pattern-dark.png')", backgroundSize: "cover" }}
+              style={{ backgroundImage: "url('/images/pattern-dark.avif')", backgroundSize: "cover" }}
             />
             
             <div className="flex flex-col gap-8 relative z-10">
@@ -202,6 +219,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </>
   );
 }

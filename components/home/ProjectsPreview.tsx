@@ -10,25 +10,25 @@ const projects = [
     title: "Velvet Oasis Kitchen",
     category: "Modular Kitchen",
     location: "Trichy",
-    image: "/images/project-kitchen.png",
+    image: "/images/project-kitchen.avif",
   },
   {
     title: "Monarch Executive Suite",
     category: "Commercial Office",
     location: "Pudukkottai",
-    image: "/images/project-office.png",
+    image: "/images/project-office.avif",
   },
   {
     title: "Zenith Residence Villa",
     category: "Residential",
     location: "Trichy",
-    image: "/images/project-villa.png",
+    image: "/images/project-villa.avif",
   },
   {
     title: "Obsidian Luxury Lounge",
     category: "Residential Design",
     location: "Pudukkottai",
-    image: "/images/hero-bg.png",
+    image: "/images/hero-bg.avif",
   },
 ];
 

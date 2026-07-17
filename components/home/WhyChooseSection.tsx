@@ -33,7 +33,7 @@ export default function WhyChooseSection() {
       <div
         className="absolute inset-0 opacity-[0.08] pointer-events-none"
         style={{
-          backgroundImage: "url('/images/pattern-violet.png')",
+          backgroundImage: "url('/images/pattern-violet.avif')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

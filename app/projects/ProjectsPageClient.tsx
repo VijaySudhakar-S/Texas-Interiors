@@ -13,7 +13,7 @@ const projects = [
     no: "01",
     title: "The Velvet Oasis Kitchen",
     category: "Kitchen",
-    image: "/images/project-kitchen.png",
+    image: "/images/project-kitchen.avif",
     location: "Trichy",
     year: "2024",
     desc: "Island layout with custom backlighting and carbon-fiber cabinetry.",
@@ -23,7 +23,7 @@ const projects = [
     no: "02",
     title: "Monarch Executive Suite",
     category: "Commercial",
-    image: "/images/project-office.png",
+    image: "/images/project-office.avif",
     location: "Pudukkottai",
     year: "2024",
     desc: "Executive boardroom with bespoke walnut acoustics and warm recessed lights.",
@@ -33,7 +33,7 @@ const projects = [
     no: "03",
     title: "Zenith Residence Villa",
     category: "Residential",
-    image: "/images/project-villa.png",
+    image: "/images/project-villa.avif",
     location: "Trichy",
     year: "2023",
     desc: "Custom double-height luxury villa — full turnkey construction.",
@@ -43,7 +43,7 @@ const projects = [
     no: "04",
     title: "The Obsidian Luxury Lounge",
     category: "Residential",
-    image: "/images/hero-bg.png",
+    image: "/images/hero-bg.avif",
     location: "Pudukkottai",
     year: "2023",
     desc: "Plush living lounge blending custom brass details with royal purple upholstery.",
@@ -53,7 +53,7 @@ const projects = [
     no: "05",
     title: "Blueprint Estate Layout",
     category: "Construction",
-    image: "/images/project-blueprint.png",
+    image: "/images/project-blueprint.avif",
     location: "Pudukkottai",
     year: "2022",
     desc: "Vaastu-compliant architectural blueprint for residential layout development.",
@@ -63,7 +63,7 @@ const projects = [
     no: "06",
     title: "Villa Construction Site",
     category: "Construction",
-    image: "/images/project-construction.png",
+    image: "/images/project-construction.avif",
     location: "Trichy",
     year: "2022",
     desc: "Ground-up luxury villa construction with premium structural materials.",
@@ -85,7 +85,7 @@ export default function ProjectsPageClient() {
       <section className="relative bg-[#080808] pt-32 pb-20 md:pt-44 md:pb-24 px-6 md:px-12 xl:px-24 overflow-hidden border-b border-white/5">
         <div
           className="absolute inset-0 opacity-[0.06] pointer-events-none"
-          style={{ backgroundImage: "url('/images/pattern-dark.png')", backgroundSize: "cover" }}
+          style={{ backgroundImage: "url('/images/pattern-dark.avif')", backgroundSize: "cover" }}
         />
         <div className="max-w-7xl mx-auto relative z-10">
           <motion.div

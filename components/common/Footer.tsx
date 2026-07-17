@@ -21,7 +21,7 @@ export default function Footer() {
       {/* Subtle pattern bg */}
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{ backgroundImage: "url('/images/pattern-dark.png')", backgroundSize: "cover" }}
+        style={{ backgroundImage: "url('/images/pattern-dark.avif')", backgroundSize: "cover" }}
       />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">

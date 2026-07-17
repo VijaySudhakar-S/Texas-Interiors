@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     siteName: "Texas Interior & Promoters",
     images: [
       {
-        url: "/images/hero-preview.jpg",
+        url: "/images/hero-preview.avif",
         width: 1200,
         height: 630,
         alt: "Texas Interior & Promoters Luxury Interior Design",
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Texas Interior & Promoters | Luxury Interior Designers in Trichy & Pudukkottai",
     description: "Premium luxury interior designers and builders in Tamil Nadu. Specializing in high-end residential, modular kitchens, offices, and turnkey construction projects.",
-    images: ["/images/hero-preview.jpg"],
+    images: ["/images/hero-preview.avif"],
   },
   icons: {
     icon: "/images/TexasLogo.avif",

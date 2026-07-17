@@ -1,21 +1,11 @@
-import SmoothScroll from "@/components/common/SmoothScroll";
-import CustomCursor from "@/components/common/CustomCursor";
-import Navbar from "@/components/common/Navbar";
-import Hero from "@/components/home/Hero";
-import ServicesPreview from "@/components/home/ServicesPreview";
-import ProjectsPreview from "@/components/home/ProjectsPreview";
-import MaterialsSection from "@/components/home/MaterialsSection";
-import WhyChooseSection from "@/components/home/WhyChooseSection";
-import CTABanner from "@/components/home/CTABanner";
-import Footer from "@/components/common/Footer";
-import StickyActions from "@/components/common/StickyActions";
+import HomeClient from "./HomeClient";
 
 // Schema.org structured data
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Texas Interior & Promoters",
-  "image": "https://texasinteriors.in/images/hero-bg.png",
+  "image": "https://texasinteriors.in/images/hero-bg.avif",
   "@id": "https://texasinteriors.in/#localbusiness",
   "url": "https://texasinteriors.in",
   "telephone": "+919750976408",
@@ -63,26 +53,8 @@ export default function Home() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
-
-      <CustomCursor />
-
-      <SmoothScroll>
-        <div className="flex flex-col min-h-screen relative bg-bg-dark text-text-white selection:bg-primary selection:text-white">
-          <Navbar />
-
-          <main className="flex-grow">
-            <Hero />
-            <ServicesPreview />
-            <ProjectsPreview />
-            <MaterialsSection />
-            <WhyChooseSection />
-            <CTABanner />
-          </main>
-
-          <Footer />
-          <StickyActions />
-        </div>
-      </SmoothScroll>
+      <HomeClient />
     </>
   );
 }
+
